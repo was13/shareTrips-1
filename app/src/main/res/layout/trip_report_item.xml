@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/report_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintBottom_toTopOf="@+id/report_image">
+
+        <ImageView
+            android:id="@+id/report_user_info_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/report_user_info_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/report_user_info_profile" />
+
+        <TextView
+            android:id="@+id/report_user_info_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/report_user_info_profile"
+            android:layout_below="@+id/report_user_info_id" />
+
+        <ImageButton
+            android:id="@+id/report_user_info_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/report_user_info_menu"/>
+
+        <ImageButton
+            android:id="@+id/report_user_info_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/report_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/report_user_info"
+        app:layout_constraintBottom_toTopOf="@+id/report_place_info" />
+
+    <RelativeLayout
+        android:id="@+id/report_place_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintTop_toBottomOf="@+id/report_image"
+        app:layout_constraintBottom_toTopOf="@+id/report_recommend_Info" >
+
+        <TextView
+            android:id="@+id/report_place_info_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" />
+
+        <RelativeLayout
+            android:id="@+id/report_place_info_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/report_place_info_content">
+
+            <ImageView
+                android:id="@+id/report_place_info_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:id="@+id/report_place_info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/report_place_info_photo" />
+
+            <TextView
+                android:id="@+id/report_place_info_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_below="@+id/report_place_info_name" />
+
+            <TextView
+                android:id="@+id/report_place_info_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/report_place_info_review" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/report_recommend_Info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintTop_toBottomOf="@+id/report_place_info">
+
+        <TextView
+            android:id="@+id/report_recommend_Info_like_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/report_recommend_Info_like_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/report_recommend_Info_like_count"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
