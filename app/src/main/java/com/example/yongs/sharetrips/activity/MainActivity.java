@@ -1,7 +1,9 @@
-package com.example.yongs.sharetrips;
+package com.example.yongs.sharetrips.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.yongs.sharetrips.R;
 
 public class MainActivity extends AppCompatActivity {
 

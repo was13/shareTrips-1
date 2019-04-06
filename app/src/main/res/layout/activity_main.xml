@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -46,48 +46,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <android.support.design.widget.TabLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabTextColor="#666666"
-        app:tabSelectedTextColor="@color/colorPrimaryDark"
-        >
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
 
-        <android.support.design.widget.TabItem
-            android:text="tab1"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50dp"
+            android:layout_below="@+id/fab"
+            android:layout_marginTop="5dp"
+            android:elevation="5dp"
+            android:background="#ffffff"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabTextColor="#666666"
+            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            app:tabIndicatorHeight="0dp"
+            >
 
-        <android.support.design.widget.TabItem
-            android:text="tab2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <android.support.design.widget.TabItem
+                android:text="홈"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_home"/>
 
-        <android.support.design.widget.TabItem
-            android:text="tab3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <android.support.design.widget.TabItem
+                android:text="여행"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_trip"/>
 
-        <android.support.design.widget.TabItem
-            android:text="tab4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <android.support.design.widget.TabItem
+                android:text="받은 메시지함"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_mail"/>
 
-    </android.support.design.widget.TabLayout>
+            <android.support.design.widget.TabItem
+                android:text="프로필"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_profile"/>
 
-     <android.support.design.widget.FloatingActionButton
-         android:id="@+id/fab"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_gravity="bottom|end"
-         android:layout_marginVertical="50dp"
-         android:layout_marginBottom="@dimen/fab_margin"
-         android:layout_marginEnd="@dimen/fab_margin"
-         android:backgroundTint="@color/colorPrimary"
-         android:src="@drawable/ic_fab"
-         app:borderWidth="0dp"/>
+        </android.support.design.widget.TabLayout>
 
+         <android.support.design.widget.FloatingActionButton
+             android:id="@+id/fab"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_marginBottom="@dimen/fab_margin"
+             android:layout_marginEnd="@dimen/fab_margin"
+             android:backgroundTint="@color/colorPrimary"
+             android:src="@drawable/ic_fab"
+             app:borderWidth="0dp"/>
+
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

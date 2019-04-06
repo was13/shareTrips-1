@@ -5,125 +5,123 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/report_user_info"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintBottom_toTopOf="@+id/report_image">
 
         <ImageView
             android:id="@+id/report_user_info_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/avengers"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
 
         <TextView
             android:id="@+id/report_user_info_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/report_user_info_profile" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="test1"
+            android:layout_marginStart="10dp"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintLeft_toRightOf="@+id/report_user_info_profile" />
 
         <TextView
             android:id="@+id/report_user_info_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/report_user_info_profile"
-            android:layout_below="@+id/report_user_info_id" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="test2"
+            android:layout_marginStart="10dp"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintLeft_toRightOf="@+id/report_user_info_profile"
+            app:layout_constraintTop_toBottomOf="@+id/report_user_info_id" />
 
         <ImageButton
             android:id="@+id/report_user_info_follow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/report_user_info_menu"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintRight_toLeftOf="@+id/report_user_info_menu"/>
 
         <ImageButton
             android:id="@+id/report_user_info_menu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageView
+            android:id="@+id/report_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"/>
-
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/report_image"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/report_user_info"
-        app:layout_constraintBottom_toTopOf="@+id/report_place_info" />
-
-    <RelativeLayout
-        android:id="@+id/report_place_info"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintTop_toBottomOf="@+id/report_image"
-        app:layout_constraintBottom_toTopOf="@+id/report_recommend_Info" >
+            android:layout_height="0dp"
+            android:background="@drawable/avengers"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/report_user_info_profile" />
 
         <TextView
             android:id="@+id/report_place_info_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true" />
+            android:layout_height="0dp"
+            android:text="test3"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintTop_toBottomOf="@+id/report_image" />
 
-        <RelativeLayout
-            android:id="@+id/report_place_info_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/report_place_info_content">
 
-            <ImageView
-                android:id="@+id/report_place_info_photo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"/>
+        <ImageView
+            android:id="@+id/report_place_info_photo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/report_place_info_content"/>
 
-            <TextView
-                android:id="@+id/report_place_info_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/report_place_info_photo" />
+        <TextView
+            android:id="@+id/report_place_info_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintLeft_toRightOf="@+id/report_place_info_photo"
+            app:layout_constraintTop_toBottomOf="@+id/report_place_info_content"/>
 
-            <TextView
-                android:id="@+id/report_place_info_review"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_below="@+id/report_place_info_name" />
+        <TextView
+            android:id="@+id/report_place_info_review"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintLeft_toRightOf="@+id/report_place_info_photo"
+            app:layout_constraintTop_toBottomOf="@+id/report_place_info_name"/>
 
-            <TextView
-                android:id="@+id/report_place_info_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/report_place_info_review" />
+        <TextView
+            android:id="@+id/report_place_info_location"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintLeft_toRightOf="@+id/report_place_info_photo"
+            app:layout_constraintTop_toBottomOf="@+id/report_place_info_review" />
 
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/report_recommend_Info"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintTop_toBottomOf="@+id/report_place_info">
 
         <TextView
             android:id="@+id/report_recommend_Info_like_count"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true" />
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintLeft_toRightOf="@+id/report_place_info_photo"
+            app:layout_constraintTop_toBottomOf="@+id/report_place_info_location" />
 
         <Button
             android:id="@+id/report_recommend_Info_like_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/report_recommend_Info_like_count"/>
-
-    </RelativeLayout>
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintTop_toBottomOf="@+id/report_recommend_Info_like_count"/>
 
 </android.support.constraint.ConstraintLayout>
