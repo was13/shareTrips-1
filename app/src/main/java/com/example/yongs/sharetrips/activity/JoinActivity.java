@@ -99,8 +99,7 @@ public class JoinActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int code, Object receiveData) {
                             Log.i(TAG,String.valueOf(code));
-                            Intent intent = new Intent(JoinActivity.this,LoginActivity.class);
-                            startActivity(intent);
+                            finish();
                         }
 
                         @Override

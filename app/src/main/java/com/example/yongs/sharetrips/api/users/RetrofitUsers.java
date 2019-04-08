@@ -3,6 +3,7 @@ package com.example.yongs.sharetrips.api.users;
 import android.content.Context;
 
 import com.example.yongs.sharetrips.api.ApiCallback;
+import com.example.yongs.sharetrips.common.Common;
 import com.example.yongs.sharetrips.model.User;
 
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitUsers {
 
         private UserApiService mUserApiService;
-        public static String mBaseUrl = UserApiService.BaseURL;
+        public static String mBaseUrl = Common.BaseURL;
         private static Context mContext;
         private static Retrofit mRetrofit;
 

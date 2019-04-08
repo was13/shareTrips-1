@@ -17,7 +17,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UserApiService {
-    String BaseURL = "http://192.168.2.2:8080";
 
     @GET("/users/{id}")
     Call<User> getUser(@Path("id") String id);

@@ -1,8 +1,12 @@
 package com.example.yongs.sharetrips.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -32,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.join_button)
     Button joinButton;
 
+    static final int READ_EXTERNAL_STORAGE_PERMISSION = 1;
+
     String mId;
     String mPassword;
 
@@ -44,12 +50,32 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        getPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+
         mRetrofitUsers = RetrofitUsers.getInstance(this).createBaseApi();
 
         setEdit();
 
         setButton();
 
+    }
+
+    private void getPermission(String permission){
+        int requestCode;
+
+        switch(permission){
+            case Manifest.permission.READ_EXTERNAL_STORAGE:
+                requestCode = READ_EXTERNAL_STORAGE_PERMISSION;
+                break;
+            default:
+                requestCode = -1;
+        }
+
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), permission);
+
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{permission},requestCode);
+        }
     }
 
     private void setEdit(){
@@ -82,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onSuccess(int code, Object receiveData) {
                             Log.i(TAG,String.valueOf(code));
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            intent.putExtra("user","test");
                             startActivity(intent);
                         }
 
