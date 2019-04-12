@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.renderscript.ScriptGroup;
 import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -80,10 +82,13 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setEdit(){
+    private void setEdit()
+    {
         title.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         location.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        content.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        content.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+        content.setSingleLine(false);
+        content.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
     }
 
     private void setButton(){
@@ -121,7 +126,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                     parameters.put("title",mTitle);
                     parameters.put("location",mLocation);
                     parameters.put("content",mContent);
-                    parameters.put("writer",getIntent().getStringExtra("user"));
+                    parameters.put("writer",getIntent().getStringExtra("username"));
 
                     mRetrofitReports.postReport(mImagePath, parameters, new ApiCallback() {
                         @Override
@@ -192,11 +197,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             mTitle = title.getText().toString();
             mReport.setTitle(mTitle);
         }
-        if(mImagePath != null){
-            mReport.setImagePath(mImagePath);
-        }
         if(location.getText().toString().length() != 0){
-            mLocation = content.getText().toString();
+            mLocation = location.getText().toString();
             mReport.setLocation(mLocation);
         }
         if(content.getText().toString().length() != 0){

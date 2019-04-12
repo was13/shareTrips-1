@@ -1,35 +1,54 @@
 package com.example.yongs.sharetrips.model;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.nio.ByteBuffer;
+
 public class Report implements Parcelable {
 
+    String username;
     String title;
-    String imagePath;
     String location;
     String content;
+    String date;
+    int view;
+    Bitmap bitmap;
 
     public Report(){
+        this.username = null;
         this.title = null;
-        this.imagePath = null;
         this.location = null;
         this.content = null;
+        this.date = null;
+        this.view = 0;
+        this.bitmap = null;
     }
 
-    public Report(String title, String imagePath, String location, String content){
+    public Report(String username, String title, String location, String content, String date, int view, Bitmap bitmap){
+            this.username = username;
             this.title = title;
-            this.imagePath =imagePath;
             this.location = location;
             this.content = content;
+            this.date = date;
+            this.view = view;
+            this.bitmap = bitmap;
     }
 
     protected Report(Parcel in) {
+        username = in.readString();
         title = in.readString();
-        imagePath = in.readString();
         location = in.readString();
         content = in.readString();
+        date = in.readString();
+        view = in.readInt();
+        bitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
+
+    public String getUsername() {return username;}
+
+    public void setUsername(String username){this.username = username;}
 
     public String getTitle() {
         return title;
@@ -37,14 +56,6 @@ public class Report implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public String getLocation() {
@@ -63,6 +74,30 @@ public class Report implements Parcelable {
         this.content = content;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -70,7 +105,6 @@ public class Report implements Parcelable {
 
     public boolean checkInput(){
         if(getTitle()==null
-                ||getImagePath()==null
                 ||getLocation()==null
                 )
             return false;
@@ -80,10 +114,13 @@ public class Report implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
         dest.writeString(title);
-        dest.writeString(imagePath);
         dest.writeString(location);
         dest.writeString(content);
+        dest.writeString(date);
+        dest.writeInt(view);
+        this.bitmap.writeToParcel(dest,flags);
     }
 
     public static final Creator<Report> CREATOR = new Creator<Report>() {

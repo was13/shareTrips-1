@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import com.example.yongs.sharetrips.api.ApiCallback;
 import com.example.yongs.sharetrips.common.Common;
+import com.example.yongs.sharetrips.model.Report;
 
 import java.io.File;
 import java.util.HashMap;
@@ -73,7 +74,42 @@ public class RetrofitReports {
                 callback.onError(t);
             }
         });
+    }
+
+    public void getReport(String username, final ApiCallback callback){
+        mReportApiService.getReport(username).enqueue(new Callback<Report>() {
+            @Override
+            public void onResponse(Call<Report> call, Response<Report> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess(response.code(), response.body());
+                }else{
+                    callback.onFailure(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Report> call, Throwable t) {
+                callback.onError(t);
+            }
+        });
+    }
 
 
+    public void getImage(String username, final ApiCallback callback){
+        mReportApiService.getImage(username).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess(response.code(), response.body());
+                }else{
+                    callback.onFailure(response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

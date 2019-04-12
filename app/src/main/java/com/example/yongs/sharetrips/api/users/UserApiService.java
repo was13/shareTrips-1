@@ -4,6 +4,7 @@ import com.example.yongs.sharetrips.model.User;
 
 import java.util.HashMap;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -18,8 +19,8 @@ import retrofit2.http.Path;
 
 public interface UserApiService {
 
-    @GET("/users/{id}")
-    Call<User> getUser(@Path("id") String id);
+    @GET("/users/{username}")
+    Call<User> getUser(@Path("username") String username);
 
     @FormUrlEncoded
     @POST("/users/join")

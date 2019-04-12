@@ -1,13 +1,16 @@
 package com.example.yongs.sharetrips.api.users;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.yongs.sharetrips.api.ApiCallback;
 import com.example.yongs.sharetrips.common.Common;
 import com.example.yongs.sharetrips.model.User;
 
+import java.io.IOException;
 import java.util.HashMap;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

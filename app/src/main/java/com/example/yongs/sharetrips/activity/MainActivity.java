@@ -94,14 +94,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchToHome(){
-        getSupportActionBar().setTitle("홈");
+        getSupportActionBar().setTitle("ShareTrips");
         FragmentTransaction transaction = getFragmentManagerInstance().beginTransaction();
         HomeFragment homeFragment = new HomeFragment();
         transaction.replace(R.id.fragment_container, homeFragment, FRAGMENT_HOME_TAG).commitAllowingStateLoss();
     }
 
     private void switchToReport(){
-        getSupportActionBar().setTitle("나의 여행");
+        getSupportActionBar().setTitle("여행");
         FragmentTransaction transaction = getFragmentManagerInstance().beginTransaction();
         ReportFragment reportFragment = new ReportFragment();
         transaction.replace(R.id.fragment_container, reportFragment, FRAGMENT_REPORT_TAG).commitAllowingStateLoss();
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ReportActivity.class);
-                intent.putExtra("user",getIntent().getStringExtra("user"));
+                intent.putExtra("username",getIntent().getStringExtra("username"));
                 startActivity(intent);
             }
         });

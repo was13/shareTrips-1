@@ -19,11 +19,13 @@ import android.widget.Toast;
 import com.example.yongs.sharetrips.R;
 import com.example.yongs.sharetrips.api.ApiCallback;
 import com.example.yongs.sharetrips.api.users.RetrofitUsers;
+import com.example.yongs.sharetrips.model.User;
 
 import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -107,8 +109,9 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int code, Object receiveData) {
                             Log.i(TAG,String.valueOf(code));
+                            User user = (User)receiveData;
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            intent.putExtra("user","test");
+                            intent.putExtra("username",user.getUsername());
                             startActivity(intent);
                         }
 
