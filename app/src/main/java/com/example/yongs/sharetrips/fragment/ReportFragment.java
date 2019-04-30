@@ -3,6 +3,7 @@ package com.example.yongs.sharetrips.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.example.yongs.sharetrips.R;
 import com.example.yongs.sharetrips.adapter.ReportAdapter;
 import com.example.yongs.sharetrips.api.ApiCallback;
+import com.example.yongs.sharetrips.api.reports.ReportApiService;
 import com.example.yongs.sharetrips.api.reports.RetrofitReports;
 import com.example.yongs.sharetrips.model.Report;
 
@@ -31,11 +33,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 
 
 /**
@@ -51,8 +55,7 @@ public class ReportFragment extends Fragment {
     ReportAdapter mReportAdapter;
     ArrayList<Report> mReportArrayList;
     RetrofitReports mRetrofitReports;
-
-    Report mReport;
+    List<Report> mReportList;
 
     private static final String TAG = ReportFragment.class.getSimpleName();
 
@@ -92,10 +95,12 @@ public class ReportFragment extends Fragment {
     public void onResume() {
         super.onResume();
         listRenewal();
+
     }
 
     private void listRenewal(){
-        Log.d(TAG,getActivity().getIntent().getStringExtra("username"));
+
+        mReportAdapter.reportArrayList.clear();
         mRetrofitReports.getReport(getActivity().getIntent().getStringExtra("username"), new ApiCallback() {
             @Override
             public void onError(Throwable t) {
@@ -104,61 +109,23 @@ public class ReportFragment extends Fragment {
 
             @Override
             public void onSuccess(int code, Object receiveData) {
-                Log.i(TAG,String.valueOf(code));
-                final Report report = (Report)receiveData;
+                Log.i(TAG, String.valueOf(code));
 
-                mRetrofitReports.getImage(getActivity().getIntent().getStringExtra("username"),new ApiCallback() {
+                mReportList = (List<Report>) receiveData;
+                for (int i = 0; i < mReportList.size(); i++) {
+                    Report report = mReportList.get(i);
+                    Log.d(TAG,String.valueOf(report.getId()));
 
-                    @Override
-                    public void onError(Throwable t) {
-                        Log.e(TAG,t.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(int code, Object receiveData) {
-                        Log.i(TAG,String.valueOf(code));
-                        ResponseBody body = (ResponseBody)receiveData;
-                        Bitmap bitmap=null;
-                        try{
-
-                            InputStream inputStream = null;
-
-                            inputStream = body.byteStream();
-
-                            bitmap = BitmapFactory.decodeStream(inputStream);
-                            if(inputStream != null){
-                                inputStream.close();
-                            }
-
-                        }catch(IOException e){
-                            e.printStackTrace();
-                        }
-
-                        mReport = new Report(report.getUsername(),report.getTitle(),report.getLocation(),report.getContent(),report.getDate(),report.getView(),bitmap);
-
-
-                        mReportAdapter.reportArrayList.clear();
-                        mReportAdapter.reportArrayList.add(mReport);
-                        list.setAdapter(mReportAdapter);
-                        mReportAdapter.notifyDataSetChanged();
-
-                    }
-
-                    @Override
-                    public void onFailure(int code) {
-                        Log.i(TAG,String.valueOf(code));
-                    }
-                });
+                    ReportApiService reportApiService = mRetrofitReports.create(ReportApiService.class);
+                    Call<ResponseBody> call = reportApiService.getImage(getActivity().getIntent().getStringExtra("username"), report.getId());
+                    new ImageCall(report).execute(call);
+                }
             }
-
             @Override
             public void onFailure(int code) {
                 Log.i(TAG,String.valueOf(code));
             }
         });
-
-
-
     }
 
     @Override
@@ -169,5 +136,52 @@ public class ReportFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private class ImageCall extends AsyncTask<Call,Void,ResponseBody>{
+        Report report;
+
+        public ImageCall(){
+            this.report = null;
+        }
+
+        public ImageCall(Report report){
+            this.report = report;
+        }
+
+        @Override
+        protected ResponseBody doInBackground(Call... calls) {
+            try {
+                Call<ResponseBody> call = calls[0];
+                retrofit2.Response<ResponseBody> response = call.execute();
+                return response.body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(ResponseBody responseBody) {
+            Bitmap bitmap = null;
+            try {
+
+                InputStream inputStream = null;
+
+                inputStream = responseBody.byteStream();
+
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+
+                Report r = new Report(report.getId(), report.getUsername(), report.getTitle(), report.getLocation(), report.getContent(), report.getDate(), report.getView(), bitmap);
+                mReportAdapter.reportArrayList.add(r);
+                list.setAdapter(mReportAdapter);
+                mReportAdapter.notifyDataSetChanged();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -19,8 +19,8 @@ import retrofit2.http.Path;
 
 public interface UserApiService {
 
-    @GET("/users/{username}")
-    Call<User> getUser(@Path("username") String username);
+    @GET("/users/{id}")
+    Call<User> getUser(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("/users/join")
@@ -30,18 +30,13 @@ public interface UserApiService {
     @POST("/users/login")
     Call<User> postLogin(@FieldMap HashMap<String, Object> parameters);
 
-    @PUT("/users")
-    Call<User> putUser(@Body User parameters);
+    @PATCH("/users/{id}/username")
+    Call<Void> patchUsername(@Path("id") String id, @Body User user);
 
-    @FormUrlEncoded
-    @PATCH("/users/{id}")
-    Call<User> patchUsername(@Path("id") String id, @Field("username") String username);
-
-    @FormUrlEncoded
-    @PATCH("/users/{id}")
-    Call<User> patchEmail(@Path("id") String id, @Field("email") String email);
+    @PATCH("/users/{id}/email")
+    Call<Void> patchEmail(@Path("id") String id, @Body User user);
 
     @DELETE("/users/{id}")
-    Call<User> deleteUser(@Path("id") String id);
+    Call<Void> deleteUser(@Path("id") String id);
 
 }

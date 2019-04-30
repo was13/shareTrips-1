@@ -106,11 +106,12 @@ public class RetrofitUsers {
             });
         }
 
-        public void putUser(HashMap<String, Object> parameters, final ApiCallback callback) {
-            mUserApiService.putUser(new User(parameters)).enqueue(new Callback<User>(){
+
+        public void patchUsername(String id,User username, final ApiCallback callback) {
+            mUserApiService.patchUsername(id,username).enqueue(new Callback<Void>(){
 
                 @Override
-                public void onResponse(Call<User> call, Response<User> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.isSuccessful()){
                         callback.onSuccess(response.code(),response.body());
                     }else{
@@ -119,17 +120,17 @@ public class RetrofitUsers {
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     callback.onError(t);
                 }
             });
         }
 
-        public void patchUsername(String id,String username, final ApiCallback callback) {
-            mUserApiService.patchUsername(id,username).enqueue(new Callback<User>(){
+        public void patchEmail(String id,User email, final ApiCallback callback) {
+            mUserApiService.patchEmail(id,email).enqueue(new Callback<Void>(){
 
                 @Override
-                public void onResponse(Call<User> call, Response<User> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.isSuccessful()){
                         callback.onSuccess(response.code(),response.body());
                     }else{
@@ -138,35 +139,16 @@ public class RetrofitUsers {
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    callback.onError(t);
-                }
-            });
-        }
-
-        public void patchEmail(String id,String email, final ApiCallback callback) {
-            mUserApiService.patchEmail(id,email).enqueue(new Callback<User>(){
-
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if(response.isSuccessful()){
-                        callback.onSuccess(response.code(),response.body());
-                    }else{
-                        callback.onFailure(response.code());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     callback.onError(t);
                 }
             });
         }
 
         public void deleteUser(String id, final ApiCallback callback) {
-            mUserApiService.deleteUser(id).enqueue(new Callback<User>() {
+            mUserApiService.deleteUser(id).enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<User> call, Response<User> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.isSuccessful()){
                         callback.onSuccess(response.code(),response.body());
                     }else{
@@ -175,7 +157,7 @@ public class RetrofitUsers {
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     callback.onError(t);
                 }
             });

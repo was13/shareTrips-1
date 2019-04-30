@@ -9,6 +9,7 @@ import com.example.yongs.sharetrips.model.Report;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -77,9 +78,9 @@ public class RetrofitReports {
     }
 
     public void getReport(String username, final ApiCallback callback){
-        mReportApiService.getReport(username).enqueue(new Callback<Report>() {
+        mReportApiService.getReport(username).enqueue(new Callback<List<Report>>() {
             @Override
-            public void onResponse(Call<Report> call, Response<Report> response) {
+            public void onResponse(Call<List<Report>> call, Response<List<Report>> response) {
                 if(response.isSuccessful()){
                     callback.onSuccess(response.code(), response.body());
                 }else{
@@ -88,15 +89,15 @@ public class RetrofitReports {
             }
 
             @Override
-            public void onFailure(Call<Report> call, Throwable t) {
+            public void onFailure(Call<List<Report>> call, Throwable t) {
                 callback.onError(t);
             }
         });
     }
 
 
-    public void getImage(String username, final ApiCallback callback){
-        mReportApiService.getImage(username).enqueue(new Callback<ResponseBody>() {
+    public void getImage(String username, int reportID, final ApiCallback callback){
+        mReportApiService.getImage(username,reportID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){

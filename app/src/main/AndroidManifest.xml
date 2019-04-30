@@ -3,7 +3,8 @@
     package="com.example.yongs.sharetrips">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +23,8 @@
         >
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.JoinActivity" />
-        <activity android:name=".activity.ReportActivity"></activity>
+        <activity android:name=".activity.ReportActivity" />
+        <activity android:name=".activity.ModifyActivity"></activity>
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package com.example.yongs.sharetrips.api.reports;
 
 import com.example.yongs.sharetrips.model.Report;
 
+import java.nio.Buffer;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -18,11 +20,11 @@ import retrofit2.http.Path;
 public interface ReportApiService {
 
     @GET("/reports/{username}")
-    Call<Report> getReport(@Path("username") String username);
+    Call<List<Report>> getReport(@Path("username") String username);
 
 
-    @GET("/reports/images/{username}")
-    Call<ResponseBody> getImage(@Path("username") String username);
+    @GET("/reports/images/{username}/{reportID}")
+    Call<ResponseBody> getImage(@Path("username") String username, @Path("reportID") int reportID);
 
     @Multipart
     @POST("/reports")

@@ -8,6 +8,7 @@ import java.nio.ByteBuffer;
 
 public class Report implements Parcelable {
 
+    int id;
     String username;
     String title;
     String location;
@@ -17,6 +18,7 @@ public class Report implements Parcelable {
     Bitmap bitmap;
 
     public Report(){
+        this.id = 0;
         this.username = null;
         this.title = null;
         this.location = null;
@@ -26,7 +28,8 @@ public class Report implements Parcelable {
         this.bitmap = null;
     }
 
-    public Report(String username, String title, String location, String content, String date, int view, Bitmap bitmap){
+    public Report(int id, String username, String title, String location, String content, String date, int view, Bitmap bitmap){
+            this.id = id;
             this.username = username;
             this.title = title;
             this.location = location;
@@ -37,6 +40,7 @@ public class Report implements Parcelable {
     }
 
     protected Report(Parcel in) {
+        id = in.readInt();
         username = in.readString();
         title = in.readString();
         location = in.readString();
@@ -45,6 +49,10 @@ public class Report implements Parcelable {
         view = in.readInt();
         bitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
+
+    public int getId(){return id;}
+
+    public void setId(int id){this.id = id;}
 
     public String getUsername() {return username;}
 
@@ -114,6 +122,7 @@ public class Report implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(username);
         dest.writeString(title);
         dest.writeString(location);

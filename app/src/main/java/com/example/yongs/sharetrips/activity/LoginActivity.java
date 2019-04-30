@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i(TAG,String.valueOf(code));
                             User user = (User)receiveData;
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            intent.putExtra("id",user.getId());
                             intent.putExtra("username",user.getUsername());
                             startActivity(intent);
                         }

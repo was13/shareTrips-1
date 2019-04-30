@@ -1,6 +1,7 @@
 package com.example.yongs.sharetrips.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.yongs.sharetrips.R;
+import com.example.yongs.sharetrips.activity.ModifyActivity;
 import com.example.yongs.sharetrips.api.ApiCallback;
 import com.example.yongs.sharetrips.api.users.RetrofitUsers;
 import com.example.yongs.sharetrips.model.User;
@@ -35,8 +37,7 @@ public class ProfileFragment extends Fragment {
 
     User mUser;
 
-    private String mUsername;
-    private String mEmail;
+    private String mId;
 
     private static final String TAG = ProfileFragment.class.getSimpleName();
 
@@ -59,20 +60,22 @@ public class ProfileFragment extends Fragment {
 
         setProfile();
 
+        setClickEvent();
+
         return view;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG,getActivity().toString());
+    public void onResume() {
+        super.onResume();
+
         setProfile();
     }
 
     private void setProfile(){
-        mUsername = getActivity().getIntent().getStringExtra("username");
+        mId = getActivity().getIntent().getStringExtra("id");
 
-        mRetrofitUsers.getUser(mUsername, new ApiCallback() {
+        mRetrofitUsers.getUser(mId, new ApiCallback() {
             @Override
             public void onError(Throwable t) {
                 Log.e(TAG,t.toString());
@@ -93,4 +96,27 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void setClickEvent(){
+        username.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ModifyActivity.class);
+                intent.putExtra("content","이름");
+                intent.putExtra("id",mId);
+                startActivity(intent);
+            }
+        });
+
+        email.setOnClickListener(new TextView.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ModifyActivity.class);
+                intent.putExtra("content","이메일");
+                intent.putExtra("id",mId);
+                startActivity(intent);
+            }
+        });
+    }
 }
