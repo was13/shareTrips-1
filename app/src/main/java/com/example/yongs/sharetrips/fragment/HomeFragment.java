@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -119,7 +121,51 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search,menu);
+        SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("검색어를 입력하세요.");
+        searchView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                mRetrofitReports.getSearch(s, new ApiCallback() {
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(int code, Object receiveData) {
+                        Log.i(TAG, String.valueOf(code));
+
+                        mReportList = (List<Report>) receiveData;
+                        for (int i = 0; i < mReportList.size(); i++) {
+                            Report report = mReportList.get(i);
+                            Log.d(TAG,String.valueOf(report.getId()));
+
+                            ReportApiService reportApiService = mRetrofitReports.create(ReportApiService.class);
+                            Call<ResponseBody> call = reportApiService.getImage(report.getId());
+                            new HomeFragment.ImageCall(report).execute(call);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int code) {
+
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                return false;
+            }
+        });
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
