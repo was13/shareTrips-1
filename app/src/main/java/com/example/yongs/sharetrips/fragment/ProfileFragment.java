@@ -46,9 +46,11 @@ public class ProfileFragment extends Fragment {
 
 
     @BindView(R.id.location_plus)
+
     ImageView location_plus;
     @BindView(R.id.theme_plus)
     ImageView theme_plus;
+
 
     ArrayList<String> countryList = new ArrayList<String>();
     ArrayList<String> themeList = new ArrayList<String>();
@@ -123,7 +125,9 @@ public class ProfileFragment extends Fragment {
                 mUser = (User) receiveData;
                 username.setText(mUser.getUsername());
                 email.setText(mUser.getEmail());
+
                 themeList.add(mUser.getTheme());
+
                 countryList.add(mUser.getCounrty());
 
             }
@@ -139,7 +143,9 @@ public class ProfileFragment extends Fragment {
         mId = getActivity().getIntent().getStringExtra("id");
 
 
+
         mRetrofitUsers.deleteTheme(mId, temp, new ApiCallback() {
+
             @Override
             public void onError(Throwable t) {
                 Log.e(TAG, t.toString());
@@ -150,7 +156,6 @@ public class ProfileFragment extends Fragment {
 
                 themeList.clear();
                 themeAdapter.notifyDataSetChanged();
-
 
             }
 
@@ -213,6 +218,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 if (countryList.get(0) != null) {
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                     builder.setMessage("관심지역이 설정되어있습니다.");
