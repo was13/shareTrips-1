@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,26 +17,13 @@
         android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
-        <FrameLayout
+
+        <ListView
+            android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" />
 
-
-            <ListView
-                android:id="@+id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"/>
-
-            <TextView
-                android:id="@+id/empty_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="여행을 기록하세요."
-                android:visibility="gone"/>
-
-        </FrameLayout>
 
     </RelativeLayout>
 
